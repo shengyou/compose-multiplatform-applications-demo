@@ -15,5 +15,6 @@ fun main() {
         }
 
         configureHome()
+        configureLogin()
     }.start(wait = true)
 }
