@@ -3,6 +3,7 @@ rootProject.name = "Compose Multiplatform Applications Demo"
 include(":androidApp")
 include(":shared")
 include(":desktopApp")
+include(":server")
 
 pluginManagement {
     repositories {
@@ -19,6 +20,7 @@ pluginManagement {
         kotlin("jvm").version(kotlinVersion)
         kotlin("multiplatform").version(kotlinVersion)
         kotlin("android").version(kotlinVersion)
+        kotlin("plugin.serialization").version(kotlinVersion)
 
         id("com.android.application").version(agpVersion)
         id("com.android.library").version(agpVersion)
