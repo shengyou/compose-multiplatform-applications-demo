@@ -37,6 +37,8 @@ android {
     }
 }
 dependencies {
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
+
     implementation("androidx.compose.ui:ui-tooling-preview:1.1.1")
     debugImplementation("androidx.compose.ui:ui-tooling:1.1.1")
 }
