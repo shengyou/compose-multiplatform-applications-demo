@@ -63,7 +63,7 @@ fun LoginScreen(
     ) {
 
         Image(
-            painterResource("compose-multiplatform.xml"),
+            painterResource("icon_login.xml"),
             null
         )
 
