@@ -12,7 +12,7 @@ import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
 
 class AuthClient {
-    private val urlString: String = "https://c836-36-231-125-36.jp.ngrok.io"
+    private val urlString: String = "https://8270-118-160-5-151.jp.ngrok.io"
     private val httpClient = HttpClient {
         install(ContentNegotiation) {
             json()

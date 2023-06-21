@@ -1,41 +1,38 @@
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import org.jetbrains.compose.resources.ExperimentalResourceApi
-import org.jetbrains.compose.resources.painterResource
+import client.AuthClient
+import data.LoginRequest
+import kotlinx.coroutines.launch
+import ui.LoginScreen
+import ui.Screen
+import ui.WelcomeScreen
+import viewmodel.AppViewModel
 
-@OptIn(ExperimentalResourceApi::class)
+expect fun getPlatformName(): String
+
 @Composable
 fun App() {
+    val screenState: MutableState<Screen> = remember { mutableStateOf(Screen.LOGIN) }
+    val appViewModel = AppViewModel()
+    val client = AuthClient()
+
     MaterialTheme {
-        var greetingText by remember { mutableStateOf("Hello, World!") }
-        var showImage by remember { mutableStateOf(false) }
-        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-            Button(onClick = {
-                greetingText = "Hello, ${getPlatformName()}"
-                showImage = !showImage
-            }) {
-                Text(greetingText)
-            }
-            AnimatedVisibility(showImage) {
-                Image(
-                    painterResource("compose-multiplatform.xml"),
-                    null
-                )
-            }
+        when (screenState.value) {
+            Screen.LOGIN -> LoginScreen(onLogin = { username, password ->
+                appViewModel.viewModelScope.launch {
+                    val response = client.login(
+                        LoginRequest(username, password)
+                    )
+
+                    if (response.result) {
+                        screenState.value = Screen.WELCOME
+                    }
+                }
+            })
+            Screen.WELCOME -> WelcomeScreen()
         }
     }
 }
-
-expect fun getPlatformName(): String

@@ -41,7 +41,6 @@ kotlin {
                 implementation("io.ktor:ktor-client-core:2.3.1")
 
                 // Coroutine
-                implementation("io.ktor:ktor-client-core:2.3.1")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
 
                 // Serialization
@@ -73,7 +72,8 @@ kotlin {
         val desktopMain by getting {
             dependencies {
                 implementation(compose.desktop.common)
-                implementation("io.ktor:ktor-client-jvm:2.3.1")
+                implementation("io.ktor:ktor-client-java:2.3.1")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.7.1")
             }
         }
     }
